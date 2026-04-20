@@ -25,8 +25,11 @@ namespace HydraMenu.ui.sections
 			if(GUILayout.Button("Fuck Start Timer"))
 			{
 				System.Random rnd = new System.Random();
+				int counter = rnd.Next(-128, 127);
+
 				// This function takes in an int, however in the networking protocol the value is a signed byte
-				PlayerControl.LocalPlayer.RpcSetStartCounter(rnd.Next(-128, 127));
+				PlayerControl.LocalPlayer.RpcSetStartCounter(counter);
+				GameStartManager.Instance.SetStartCounter((sbyte)counter);
 			}
 
 			if(GUILayout.Button("Trigger All Spores"))
