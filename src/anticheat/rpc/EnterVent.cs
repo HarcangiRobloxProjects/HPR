@@ -20,6 +20,12 @@ namespace HydraMenu.anticheat.rpc
 				Anticheat.Flag(player, $"{player.Data.PlayerName} tried to vent when their role ({player.Data.RoleType}) does not support venting.");
 				blockRpc = true;
 			}
+
+			if(GameManager.Instance.IsHideAndSeek() && RoleManager.IsImpostorRole(player.Data.RoleType))
+			{
+				Anticheat.Flag(player, $"{player.Data.PlayerName} tried to vent while being the seeker.");
+				blockRpc = true;
+			}
 		}
 
 		public override RpcCalls GetRpcCall()
