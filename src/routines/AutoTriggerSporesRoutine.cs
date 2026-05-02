@@ -6,7 +6,7 @@ namespace HydraMenu.routines
 	{
 		public AutoTriggerSporesRoutine()
 		{
-			this.routineName = "AutoTriggerSpores";
+			RoutineName = "AutoTriggerSpores";
 		}
 
 		public readonly float SPORE_TRIGGER_LENGTH = 5.0f;

@@ -6,7 +6,7 @@ namespace HydraMenu.routines
 	{
 		public PlayerFollowerRoutine()
 		{
-			this.routineName = "PlayerFollower";
+			RoutineName = "PlayerFollower";
 		}
 
 		public bool _enabled = false;

@@ -6,7 +6,7 @@ namespace HydraMenu.routines
 	{
 		public DiscoHostRoutine()
 		{
-			this.routineName = "DiscoHost";
+			RoutineName = "DiscoHost";
 		}
 
 		public float randomizationDelay = 0.5f;
