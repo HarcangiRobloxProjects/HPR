@@ -1,4 +1,5 @@
 ﻿using Hazel;
+using System;
 using UnityEngine;
 
 namespace HydraMenu.anticheat.rpc
@@ -28,6 +29,11 @@ namespace HydraMenu.anticheat.rpc
 		public override RpcCalls GetRpcCall()
 		{
 			return RpcCalls.SnapTo;
+		}
+
+		public override Type GetExpectedNetObject()
+		{
+			return typeof(CustomNetworkTransform);
 		}
 	}
 }

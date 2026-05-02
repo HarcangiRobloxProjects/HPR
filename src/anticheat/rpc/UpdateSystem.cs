@@ -1,5 +1,6 @@
 ﻿using Hazel;
 using InnerNet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -113,6 +114,11 @@ namespace HydraMenu.anticheat.rpc
 		public override RpcCalls GetRpcCall()
 		{
 			return RpcCalls.UpdateSystem;
+		}
+
+		public override Type GetExpectedNetObject()
+		{
+			return typeof(ShipStatus);
 		}
 	}
 }

@@ -46,12 +46,15 @@ namespace HydraMenu.anticheat
 			static bool Prefix(PlayerControl __instance, byte callId, MessageReader reader)
 			{
 				RpcCalls RpcId = (RpcCalls)callId;
-				if(!RpcHandlers.TryGetValue(RpcId, out RpcCheck rpcCheck))
-				{
-					return true;
-				}
 
-				if(!Enabled || !rpcCheck.Enabled) return true;
+				RpcHandlers.TryGetValue(RpcId, out RpcCheck rpcCheck);
+				if(!Enabled || rpcCheck == null || !rpcCheck.Enabled) return true;
+
+				if(rpcCheck.GetExpectedNetObject() != typeof(PlayerControl))
+				{
+					// Recieved a RPC that should've been sent for a different net object, some sort of exploit attempt?
+					return false;
+				}
 
 				// Only we, the host, should be sending host-only RPCs
 				if(AmongUsClient.Instance.AmHost && rpcCheck.IsHostOnly())
@@ -85,12 +88,15 @@ namespace HydraMenu.anticheat
 			{
 				PlayerControl player = __instance.myPlayer;
 				RpcCalls RpcId = (RpcCalls)callId;
-				if(!RpcHandlers.TryGetValue(RpcId, out RpcCheck rpcCheck))
-				{
-					return true;
-				}
 
-				if(!Enabled || !rpcCheck.Enabled) return true;
+				RpcHandlers.TryGetValue(RpcId, out RpcCheck rpcCheck);
+				if(!Enabled || rpcCheck == null || !rpcCheck.Enabled) return true;
+
+				if(rpcCheck.GetExpectedNetObject() != typeof(PlayerPhysics))
+				{
+					// Recieved a RPC that should've been sent for a different net object, some sort of exploit attempt?
+					return false;
+				}
 
 				int oldReadPosition = reader.Position;
 				bool blockRpc = false;
@@ -117,12 +123,15 @@ namespace HydraMenu.anticheat
 			{
 				PlayerControl player = __instance.myPlayer;
 				RpcCalls RpcId = (RpcCalls)callId;
-				if(!RpcHandlers.TryGetValue(RpcId, out RpcCheck rpcCheck))
-				{
-					return true;
-				}
 
-				if(!Enabled || !rpcCheck.Enabled) return true;
+				RpcHandlers.TryGetValue(RpcId, out RpcCheck rpcCheck);
+				if(!Enabled || rpcCheck == null || !rpcCheck.Enabled) return true;
+
+				if(rpcCheck.GetExpectedNetObject() != typeof(CustomNetworkTransform))
+				{
+					// Recieved a RPC that should've been sent for a different net object, some sort of exploit attempt?
+					return false;
+				}
 
 				int oldReadPosition = reader.Position;
 				bool blockRpc = false;
@@ -148,12 +157,15 @@ namespace HydraMenu.anticheat
 			static bool Prefix(ShipStatus __instance, byte callId, MessageReader reader)
 			{
 				RpcCalls RpcId = (RpcCalls)callId;
-				if(!RpcHandlers.TryGetValue(RpcId, out RpcCheck rpcCheck))
-				{
-					return true;
-				}
 
-				if(!Enabled || !rpcCheck.Enabled) return true;
+				RpcHandlers.TryGetValue(RpcId, out RpcCheck rpcCheck);
+				if(!Enabled || rpcCheck == null || !rpcCheck.Enabled) return true;
+
+				if(rpcCheck.GetExpectedNetObject() != typeof(ShipStatus))
+				{
+					// Recieved a RPC that should've been sent for a different net object, some sort of exploit attempt?
+					return false;
+				}
 
 				int oldReadPosition = reader.Position;
 				bool blockRpc = false;

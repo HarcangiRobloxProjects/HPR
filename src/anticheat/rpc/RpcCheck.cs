@@ -1,4 +1,5 @@
 ﻿using Hazel;
+using InnerNet;
 using System;
 
 namespace HydraMenu.anticheat.rpc
@@ -9,13 +10,21 @@ namespace HydraMenu.anticheat.rpc
 
 		public virtual void Validate(PlayerControl player, MessageReader reader, ref bool blockRpc) { }
 
-		public virtual RpcCalls GetRpcCall() {
+		public virtual RpcCalls GetRpcCall()
+		{
 			throw new InvalidOperationException("Unimplemented");
 		}
 
 		public virtual bool IsHostOnly()
 		{
 			return false;
+		}
+
+		public virtual Type GetExpectedNetObject()
+		{
+			// There are more RPCs for the PlayerControl net object than for any other net object
+			// To make it easier for us, each instance of RpcCheck will be for the PlayerControl net object unless stated otherwise
+			return typeof(PlayerControl);
 		}
 	}
 }

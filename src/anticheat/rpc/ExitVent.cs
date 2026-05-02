@@ -1,4 +1,5 @@
 ﻿using Hazel;
+using System;
 
 namespace HydraMenu.anticheat.rpc
 {
@@ -29,6 +30,11 @@ namespace HydraMenu.anticheat.rpc
 		public override RpcCalls GetRpcCall()
 		{
 			return RpcCalls.ExitVent;
+		}
+
+		public override Type GetExpectedNetObject()
+		{
+			return typeof(PlayerPhysics);
 		}
 	}
 }
