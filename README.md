@@ -9,7 +9,7 @@ We have a Discord server, feel free to join and talk, ask for help, or offer sug
 
 # Features
 > [!NOTE]
-> This repo is a heavily stripped-down version with features I deem too powerful removed to prevent abuse, such as [being able to ban players from lobbies without being host](https://streamable.com/wtb7jl) and [becoming immortal without being host](https://streamable.com/k1b0m0).
+> This repo is a heavily stripped-down version with features I deem too powerful removed to prevent abuse, such as [being able to ban players from lobbies without being host](https://streamable.com/wtb7jl)
 >
 > Being able to ban players from lobbies without being host is a great way to deal with annoying players who call meetings as soon as the game starts, or ban hackers from lobbies I am inside without having to reach a unanimous votekick, however this opens the door for abuse where someone could ban all the imposters from the lobby to insta-win or banning players who suspect you being an imposter.
 
@@ -22,6 +22,7 @@ We have a Discord server, feel free to join and talk, ask for help, or offer sug
 - Sabotage and close doors as crewmate
 - Device and version spoofer
 - See other player's roles
+- [Become immortal](https://streamable.com/k1b0m0)
 - [Configurable anticheat to detect common hacks and exploits](https://github.com/MrDiamond64/Hydra?tab=readme-ov-file#hydra-anticheat)
 - And more!
 
