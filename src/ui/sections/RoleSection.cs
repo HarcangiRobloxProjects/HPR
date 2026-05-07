@@ -12,7 +12,7 @@ namespace HydraMenu.ui.sections
 			name = "Roles";
 		}
 
-		private byte selectedRole = 0;
+		private RoleTypes selectedRole = RoleTypes.Crewmate;
 
 		// The RoleTypes enum has some weird gaps, like everything from Crewmate (0) to Tracker (10) is normal, but then Detective is 12 and Viper is 18
 		// https://www.innersloth.com/2026-roadmap-part-1/
@@ -47,24 +47,22 @@ namespace HydraMenu.ui.sections
 			Roles.DisableShapeshiftAnimation = GUILayout.Toggle(Roles.DisableShapeshiftAnimation, "Disable Shapeshift Animation");
 			// Roles.DisablePhantomEndAnimation = GUILayout.Toggle(Roles.DisablePhantomEndAnimation, "Disable Phantom End Animation");
 
-			RoleTypes role = roles[selectedRole];
-			GUILayout.Label($"Change role to: {role}");
-
+			GUILayout.Label($"Change role to: {selectedRole}");
 			GUILayout.BeginHorizontal();
-			selectedRole = (byte)GUILayout.HorizontalSlider((float)selectedRole, 0, roles.Count - 1);
+			selectedRole = Controls.HorizontalRoleSlider(selectedRole);
 
 			if(GUILayout.Button("Apply Role" + (AmongUsClient.Instance.AmHost ? "" : " (Local)")) && PlayerControl.LocalPlayer)
 			{
-				Hydra.Log.LogInfo($"Updating role to {role}");
-				UpdateRole(role);
+				Hydra.Log.LogInfo($"Updating role to {selectedRole}");
+				UpdateRole(selectedRole);
 
 				if(AmongUsClient.Instance.AmHost)
 				{
 					Hydra.Log.LogInfo("Since we are host, we can send the SetRole RPC to sync the new role to the server");
-					PlayerControl.LocalPlayer.RpcSetRole(role, true);
+					PlayerControl.LocalPlayer.RpcSetRole(selectedRole, true);
 				}
 
-				Hydra.notifications.Send("Update Role", $"Your role has been updated to {role}.");
+				Hydra.notifications.Send("Update Role", $"Your role has been updated to {selectedRole}.");
 			}
 			GUILayout.EndHorizontal();
 		}

@@ -1,0 +1,39 @@
+﻿using AmongUs.GameOptions;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace HydraMenu.ui
+{
+	internal class Controls
+	{
+		// The RoleTypes enum has some weird gaps, everything from Crewmate (0) to Tracker (10) is normal, but then Detective is 12 and Viper is 18
+		// https://www.innersloth.com/2026-roadmap-part-1/
+		// The Among Us 2026 roadmap does state that there are currently 15 prototype roles in the works,
+		// could these gaps be attributed to roles that have not been added to the retail version of the game?
+		public static readonly List<RoleTypes> RolesList = new List<RoleTypes>()
+		{
+			RoleTypes.Crewmate,
+			RoleTypes.Impostor,
+			RoleTypes.Scientist,
+			RoleTypes.Engineer,
+			RoleTypes.GuardianAngel,
+			RoleTypes.Shapeshifter,
+			RoleTypes.Noisemaker,
+			RoleTypes.Phantom,
+			RoleTypes.Tracker,
+			RoleTypes.Detective,
+			RoleTypes.Viper,
+			RoleTypes.CrewmateGhost,
+			RoleTypes.ImpostorGhost
+		};
+
+		public static RoleTypes HorizontalRoleSlider(RoleTypes currentRole)
+		{
+			int currentValue = RolesList.IndexOf(currentRole);
+
+			byte newValue = (byte)GUILayout.HorizontalSlider(currentValue, 0, RolesList.Count - 1);
+
+			return RolesList[newValue];
+		}
+	}
+}
