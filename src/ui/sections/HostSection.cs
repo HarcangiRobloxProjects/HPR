@@ -1,6 +1,7 @@
 ﻿using BepInEx.Unity.IL2CPP.Utils.Collections;
 using HydraMenu.features;
 using InnerNet;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -120,7 +121,7 @@ namespace HydraMenu.ui.sections
 			if(GUILayout.Button("Spawn Lobby"))
 			{
 				// From GameStartManager::Start
-				LobbyBehaviour.Instance = Object.Instantiate<LobbyBehaviour>(GameStartManager.Instance.LobbyPrefab);
+				LobbyBehaviour.Instance = UnityEngine.Object.Instantiate<LobbyBehaviour>(GameStartManager.Instance.LobbyPrefab);
 				AmongUsClient.Instance.Spawn(LobbyBehaviour.Instance, -2, SpawnFlags.None);
 
 				Hydra.notifications.Send("Lobby Map", "A new instance of the lobby map has been spawned", 5);
@@ -132,6 +133,25 @@ namespace HydraMenu.ui.sections
 			Host.AlwaysImposter.Enabled = GUILayout.Toggle(Host.AlwaysImposter.Enabled, "Enabled");
 			GUILayout.Label($"Role to assign: {Host.AlwaysImposter.assignedRole}");
 			Host.AlwaysImposter.assignedRole = Controls.HorizontalRoleSlider(Host.AlwaysImposter.assignedRole);
+
+			GUILayout.Space(5);
+			GUILayout.Label("Meeting Controls:");
+			Host.DisableMeetings.Enabled = GUILayout.Toggle(Host.DisableMeetings.Enabled, "Disable Meetings");
+			Hydra.routines.reportBodySpam.Enabled = GUILayout.Toggle(Hydra.routines.reportBodySpam.Enabled, "Spam Report Bodies");
+
+			if(GUILayout.Button("Close Meeting"))
+			{
+				if(MeetingHud.Instance == null)
+				{
+					Hydra.notifications.Send("Skip Meeting", "This option can only be used in a meeting.");
+				}
+				else
+				{
+					MeetingHud.VoterState[] votes = Array.Empty<MeetingHud.VoterState>();
+					MeetingHud.Instance.RpcVotingComplete(votes, null, false);
+					MeetingHud.Instance.RpcClose();
+				}
+			}
 
 			GUILayout.Space(5);
 			GUILayout.Label("Disco Party:");
