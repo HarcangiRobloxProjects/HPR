@@ -33,7 +33,8 @@ namespace HydraMenu.routines
 				// If we are attempting to disable Follow Player, and the Player UI shows the player we are currently following, then disable the routine
 				else if(!value && AmAttachedTo(PlayersSection.selectedPlayer))
 				{
-					Disable();
+					_enabled = false;
+					OnDisable();
 				}
 			}
 		}
@@ -42,15 +43,15 @@ namespace HydraMenu.routines
 		{
 			if(PlayerControl.LocalPlayer == null)
 			{
-				Disable();
 				Hydra.notifications.Send("Player Follower", "Player Follower was disabled as you left the game.");
+				Enabled = false;
 				return;
 			}
 
 			if(following == null)
 			{
-				Disable();
 				Hydra.notifications.Send("Player Follower", "Player Follower was disabled as the person you attached to left the game.");
+				Enabled = false;
 				return;
 			}
 
@@ -72,9 +73,8 @@ namespace HydraMenu.routines
 			return player == following;
 		}
 
-		private void Disable()
+		public override void OnDisable()
 		{
-			_enabled = false;
 			following = null;
 			if(PlayerControl.LocalPlayer) PlayerControl.LocalPlayer.moveable = true;
 		}

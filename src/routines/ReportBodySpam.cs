@@ -14,19 +14,7 @@ namespace HydraMenu.routines
 
 		public override void Run()
 		{
-			if(PlayerControl.LocalPlayer == null || !AmongUsClient.Instance.AmHost)
-			{
-				Hydra.notifications.Send("Report Body Spam", "Report body spammer has been disabled as you are not the host or you left the lobby.", 5);
-				Enabled = false;
-				return;
-			}
-
-			if(ShipStatus.Instance == null)
-			{
-				Hydra.notifications.Send("Report Body Spam", "Report body spammer has been disabled as the game must have started first.", 5);
-				Enabled = false;
-				return;
-			}
+			if(ShipStatus.Instance == null) return;
 
 			timeElapsed += Time.deltaTime;
 			if(timeElapsed < reportDelay) return;
@@ -41,6 +29,23 @@ namespace HydraMenu.routines
 			PlayerControl.LocalPlayer.RpcStartMeeting(player.Data);
 
 			timeElapsed = 0f;
+		}
+
+		public override void OnEnable()
+		{
+			if(PlayerControl.LocalPlayer == null || ShipStatus.Instance == null)
+			{
+				Hydra.notifications.Send("Report Body Spam", "Report Body Spam can only be used once the game has started.", 10);
+				Enabled = false;
+				return;
+			}
+
+			if(!AmongUsClient.Instance.AmHost)
+			{
+				Hydra.notifications.Send("Report Body Spam", "Report Body Spam can only be used if you are the host of the lobby.", 10);
+				Enabled = false;
+				return;
+			}
 		}
 	}
 }

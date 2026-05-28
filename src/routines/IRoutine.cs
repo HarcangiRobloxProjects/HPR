@@ -6,9 +6,23 @@
 		public bool _enabled = false;
 		public virtual bool Enabled {
 			get { return _enabled; }
-			set { _enabled = value; }
+			set {
+				if(value == _enabled) return;
+
+				if(value)
+				{
+					OnEnable();
+				}
+				else
+				{
+					OnDisable();
+				}
+			}
 		}
 
 		public abstract void Run();
+
+		public virtual void OnEnable() { }
+		public virtual void OnDisable() { }
 	}
 }

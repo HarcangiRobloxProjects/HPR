@@ -14,21 +14,7 @@ namespace HydraMenu.routines
 
 		public override void Run()
 		{
-			if(ShipStatus.Instance == null)
-			{
-				Enabled = false;
-				Hydra.notifications.Send("Trigger Spores", "Auto-Trigger Spores was disabled as you left the game.", 10);
-
-				return;
-			}
-
-			if(Utilities.GetCurrentMap() != MapNames.Fungle)
-			{
-				Enabled = false;
-				Hydra.notifications.Send("Trigger Spores", "Auto-Trigger Spores was disabled as this option only works in The Fungle.", 10);
-
-				return;
-			}
+			if(ShipStatus.Instance == null) return;
 
 			timeElapsed += Time.deltaTime;
 			if(timeElapsed < SPORE_TRIGGER_LENGTH) return;
@@ -38,6 +24,23 @@ namespace HydraMenu.routines
 			foreach(Mushroom mushroom in shipStatus.sporeMushrooms.Values)
 			{
 				PlayerControl.LocalPlayer.RpcTriggerSpores(mushroom);
+			}
+		}
+
+		public override void OnEnable()
+		{
+			if(ShipStatus.Instance == null)
+			{
+				Hydra.notifications.Send("Trigger Spores", "Auto-Trigger Spores can only be used if the game has started.", 10);
+				Enabled = false;
+				return;
+			}
+
+			if(Utilities.GetCurrentMap() != MapNames.Fungle)
+			{
+				Hydra.notifications.Send("Trigger Spores", "Auto-Trigger Spores can only be used in The Fungle.", 10);
+				Enabled = false;
+				return;
 			}
 		}
 	}

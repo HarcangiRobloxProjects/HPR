@@ -14,14 +14,6 @@ namespace HydraMenu.routines
 
 		public override void Run()
 		{
-			if(PlayerControl.LocalPlayer == null || !AmongUsClient.Instance.AmHost)
-			{
-				Enabled = false;
-				Hydra.notifications.Send("Disco", "Disco mode has been disabled as you are not the host or you left the lobby.", 5);
-
-				return;
-			}
-
 			timeElapsed += Time.deltaTime;
 			if(timeElapsed < randomizationDelay) return;
 
@@ -32,6 +24,23 @@ namespace HydraMenu.routines
 			}
 
 			timeElapsed = 0f;
+		}
+
+		public override void OnEnable()
+		{
+			if(PlayerControl.LocalPlayer == null)
+			{
+				Hydra.notifications.Send("Disco Party", "Disco Party can only be used inside of a game.", 10);
+				Enabled = false;
+				return;
+			}
+
+			if(!AmongUsClient.Instance.AmHost)
+			{
+				Hydra.notifications.Send("Disco Party", "Disco Party can only be used if you are the host of the lobby.", 10);
+				Enabled = false;
+				return;
+			}
 		}
 	}
 }

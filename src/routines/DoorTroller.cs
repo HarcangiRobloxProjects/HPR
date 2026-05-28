@@ -15,29 +15,7 @@ namespace HydraMenu.routines
 
 		public override void Run()
 		{
-			if(PlayerControl.LocalPlayer == null || ShipStatus.Instance == null)
-			{
-				Hydra.notifications.Send("Door Troller", "Door troller has been disabled as you either left the game or the current map does not support unlocking doors.", 5);
-
-				Enabled = false;
-				return;
-			}
-
-			if(ShipStatus.Instance.AllDoors.Count == 0)
-			{
-				Hydra.notifications.Send("Door Troller", "Door troller was disabled as this map does not have any doors.", 5);
-
-				Enabled = false;
-				return;
-			}
-
-			if(!Sabotage.CanUnlockDoors())
-			{
-				Hydra.notifications.Send("Door Troller", "Door troller can only work if you are the host, or if the current map supports unlocking doors.", 5);
-
-				Enabled = false;
-				return;
-			}
+			if(ShipStatus.Instance == null) return;
 
 			timeElapsed += Time.deltaTime;
 			if(timeElapsed < lockAndUnlockDelay) return;
@@ -53,6 +31,30 @@ namespace HydraMenu.routines
 
 			doorsLocked = !doorsLocked;
 			timeElapsed = 0;
+		}
+
+		public override void OnEnable()
+		{
+			if(PlayerControl.LocalPlayer == null || ShipStatus.Instance == null)
+			{
+				Hydra.notifications.Send("Door Troller", "Door troller can only be used if the game has started.", 10);
+				Enabled = false;
+				return;
+			}
+
+			if(ShipStatus.Instance.AllDoors.Count == 0)
+			{
+				Hydra.notifications.Send("Door Troller", "Door troller can not be used as this map does not have any doors.", 10);
+				Enabled = false;
+				return;
+			}
+
+			if(!Sabotage.CanUnlockDoors())
+			{
+				Hydra.notifications.Send("Door Troller", "Door troller can only be used if you are the host, or if the current map supports unlocking doors.", 10);
+				Enabled = false;
+				return;
+			}
 		}
 	}
 }
