@@ -4,10 +4,7 @@ namespace HydraMenu.routines
 {
 	public class AutoTriggerSporesRoutine : IRoutine
 	{
-		public AutoTriggerSporesRoutine()
-		{
-			name = "AutoTriggerSpores";
-		}
+		public AutoTriggerSporesRoutine() : base("AutoTriggerSpores") { }
 
 		public readonly float SPORE_TRIGGER_LENGTH = 5.0f;
 		private float timeElapsed = 0f;

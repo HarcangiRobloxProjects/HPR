@@ -5,10 +5,7 @@ namespace HydraMenu.ui.sections
 {
 	internal class SabotageSection : ISection
 	{
-		public SabotageSection()
-		{
-			name = "Sabotage";
-		}
+		public SabotageSection() : base("Sabotage") { }
 
 		public override void Render()
 		{

@@ -10,10 +10,7 @@ namespace HydraMenu.ui.sections
 {
 	internal class HostSection : ISection
 	{
-		public HostSection()
-		{
-			name = "Host";
-		}
+		public HostSection() : base("Host") { }
 
 		private byte selectedMap = 0;
 

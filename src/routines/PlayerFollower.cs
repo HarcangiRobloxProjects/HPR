@@ -2,10 +2,7 @@
 {
 	public class PlayerFollowerRoutine : IRoutine
 	{
-		public PlayerFollowerRoutine()
-		{
-			name = "PlayerFollower";
-		}
+		public PlayerFollowerRoutine() : base("PlayerFollower") { }
 
 		public PlayerControl following;
 

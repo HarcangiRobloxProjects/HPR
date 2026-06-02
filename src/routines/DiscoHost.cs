@@ -4,10 +4,7 @@ namespace HydraMenu.routines
 {
 	public class DiscoHostRoutine : IRoutine
 	{
-		public DiscoHostRoutine()
-		{
-			name = "DiscoHost";
-		}
+		public DiscoHostRoutine() : base("DiscoHost") { }
 
 		public float randomizationDelay = 0.5f;
 		private float timeElapsed = 0f;

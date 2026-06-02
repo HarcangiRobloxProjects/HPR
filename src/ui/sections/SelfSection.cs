@@ -7,10 +7,7 @@ namespace HydraMenu.ui.sections
 {
 	internal class SelfSection : ISection
 	{
-		public SelfSection()
-		{
-			name = "Self";
-		}
+		public SelfSection() : base("Self") { }
 
 		private uint level = 199;
 
@@ -19,7 +16,8 @@ namespace HydraMenu.ui.sections
 			if(PlayerControl.LocalPlayer == null || PlayerControl.LocalPlayer.Data == null)
 			{
 				GUILayout.Label("You are not currently in a game, these options will not work.");
-			} else
+			}
+			else
 			{
 				GUILayout.Label($"Role: {PlayerControl.LocalPlayer.Data.RoleType}");
 			}

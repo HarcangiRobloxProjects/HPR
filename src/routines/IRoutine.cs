@@ -2,7 +2,7 @@
 {
 	public abstract class IRoutine
 	{
-		public string name = "";
+		public readonly string name = "";
 
 		public bool _enabled = false;
 		public virtual bool Enabled
@@ -22,6 +22,11 @@
 					OnDisable();
 				}
 			}
+		}
+
+		public IRoutine(string name)
+		{
+			this.name = name;
 		}
 
 		public abstract void Run();

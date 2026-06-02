@@ -1,16 +1,12 @@
 ﻿using AmongUs.GameOptions;
 using HydraMenu.features;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HydraMenu.ui.sections
 {
 	internal class RolesSection : ISection
 	{
-		public RolesSection()
-		{
-			name = "Roles";
-		}
+		public RolesSection() : base("Roles") { }
 
 		private RoleTypes selectedRole = RoleTypes.Crewmate;
 

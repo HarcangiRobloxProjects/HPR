@@ -4,10 +4,7 @@ namespace HydraMenu.routines
 {
 	public class ReportBodySpam : IRoutine
 	{
-		public ReportBodySpam()
-		{
-			name = "ReportBodySpam";
-		}
+		public ReportBodySpam() : base("ReportBodySpam") { }
 
 		public float reportDelay = 2.5f;
 		private float timeElapsed = 0f;

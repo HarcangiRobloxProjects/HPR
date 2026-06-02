@@ -8,10 +8,7 @@ namespace HydraMenu.ui.sections
 {
 	internal class PlayersSection : ISection
 	{
-		public PlayersSection()
-		{
-			name = "Players";
-		}
+		public PlayersSection() : base("Players") { }
 
 		public static Vector2 PlayerPaneSize
 		{

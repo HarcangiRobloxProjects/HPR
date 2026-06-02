@@ -6,10 +6,7 @@ namespace HydraMenu.ui.sections
 {
 	internal class MovementSection : ISection
 	{
-		public MovementSection()
-		{
-			name = "Movement";
-		}
+		public MovementSection() : base("Movement") { }
 
 		public override void Render()
 		{

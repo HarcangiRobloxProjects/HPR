@@ -5,10 +5,7 @@ namespace HydraMenu.ui.sections
 {
 	internal class MenuSection : ISection
 	{
-		public MenuSection()
-		{
-			name = "Menu";
-		}
+		public MenuSection() : base("Menu") { }
 
 		public override void Render()
 		{

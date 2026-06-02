@@ -5,10 +5,7 @@ namespace HydraMenu.ui.sections
 {
 	internal class AnticheatSection : ISection
 	{
-		public AnticheatSection()
-		{
-			name = "Anticheat";
-		}
+		public AnticheatSection() : base("Anticheat") { }
 
 		public override void Render()
 		{

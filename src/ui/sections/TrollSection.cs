@@ -5,10 +5,7 @@ namespace HydraMenu.ui.sections
 {
 	internal class TrollSection : ISection
 	{
-		public TrollSection()
-		{
-			name = "Troll";
-		}
+		public TrollSection() : base("Troll") { }
 
 		public override void Render()
 		{

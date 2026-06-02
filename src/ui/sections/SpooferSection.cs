@@ -7,10 +7,7 @@ namespace HydraMenu.ui.sections
 {
 	internal class SpooferSection : ISection
 	{
-		public SpooferSection()
-		{
-			name = "Spoofer";
-		}
+		public SpooferSection() : base("Spoofer") { }
 
 		public readonly Dictionary<string, int> versions = new Dictionary<string, int>()
 		{
