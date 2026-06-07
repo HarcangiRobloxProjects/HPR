@@ -9,14 +9,7 @@ namespace HydraMenu.features
 		{
 			public static PlayerControl source;
 
-			public static bool Enabled
-			{
-				get { return source != null; }
-				set
-				{
-					if(!value) source = null;
-				}
-			}
+			public static bool Enabled { get; set; } = false;
 
 			static void Postfix(PlayerControl __instance, PlayerControl target, MurderResultFlags resultFlags)
 			{
@@ -24,7 +17,7 @@ namespace HydraMenu.features
 
 				if(AmongUsClient.Instance.AmHost)
 				{
-					Utilities.OpenMeeting(source, target.Data);
+					Utilities.OpenMeeting(source ?? PlayerControl.LocalPlayer, target.Data);
 					return;
 				}
 

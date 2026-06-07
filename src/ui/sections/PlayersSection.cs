@@ -143,7 +143,7 @@ namespace HydraMenu.ui.sections
 				);
 			}
 
-			Controls.PlayerSpecificToggle("Follow", target, ref Hydra.routines.playerFollower.following);
+			Hydra.routines.playerFollower.Enabled = Controls.PlayerSpecificToggle("Follow", target, ref Hydra.routines.playerFollower.following);
 
 			if(GUILayout.Button("Teleport"))
 			{
@@ -169,13 +169,8 @@ namespace HydraMenu.ui.sections
 			GUILayout.Space(5);
 			GUILayout.Label("Host Only Features:" + (AmongUsClient.Instance.AmHost ? "" : "\n(Using these will get you kicked!)"));
 
-			if(Controls.PlayerSpecificToggle("Place in Jail", target, ref Hydra.routines.jailPlayer.target))
-			{
-				// This function is called when the toggle is disabled aswell, but that does not make any impact
-				Hydra.routines.jailPlayer.OnEnable();
-			}
-
-			Controls.PlayerSpecificToggle("Auto Report Bodies As", target, ref Troll.AutoReportBodies.source);
+			Troll.AutoReportBodies.Enabled = Controls.PlayerSpecificToggle("Auto Report Bodies As", target, ref Troll.AutoReportBodies.source);
+			Hydra.routines.jailPlayer.Enabled = Controls.PlayerSpecificToggle("Place in Jail", target, ref Hydra.routines.jailPlayer.target);
 
 			if(GUILayout.Button("Force Meeting As"))
 			{

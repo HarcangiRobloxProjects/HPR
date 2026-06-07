@@ -10,18 +10,6 @@ namespace HydraMenu.routines
 
 		public PlayerControl target;
 
-		public override bool Enabled
-		{
-			get
-			{
-				return target != null;
-			}
-			set
-			{
-				if(!value) target = null;
-			}
-		}
-
 		// For the sake of performance, only check if players are outside of the jail every 500ms
 		public float delay = 0.5f;
 		private float timeElapsed = 0f;
@@ -31,6 +19,12 @@ namespace HydraMenu.routines
 			timeElapsed += Time.deltaTime;
 			if(timeElapsed < delay) return;
 			timeElapsed = 0f;
+
+			if(target == null)
+			{
+				Enabled = false;
+				return;
+			}
 
 			GetMapData(out SystemTypes jailRoom, out int ventId);
 
@@ -114,6 +108,11 @@ namespace HydraMenu.routines
 				Enabled = false;
 				return;
 			}
+		}
+
+		public override void OnDisable()
+		{
+			target = null;
 		}
 
 		public override void OnDisconnect()

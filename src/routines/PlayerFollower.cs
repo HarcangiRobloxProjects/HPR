@@ -6,21 +6,15 @@
 
 		public PlayerControl following;
 
-		public override bool Enabled
-		{
-			get
-			{
-				return following != null;
-			}
-			set
-			{
-				if(!value) following = null;
-			}
-		}
-
 		public override void Run()
 		{
 			if(PlayerControl.LocalPlayer == null) return;
+
+			if(following == null)
+			{
+				Enabled = false;
+				return;
+			}
 
 			/*
 			float distance = Vector3.Distance(following.transform.position, PlayerControl.LocalPlayer.transform.position);
@@ -33,6 +27,17 @@
 
 			// We could probably see how haunting as a ghost makes the follower walks towards a player's position so we don't have to directly teleport, but this works fine for now
 			PlayerControl.LocalPlayer.transform.position = following.transform.position;
+		}
+
+		public override void OnEnable()
+		{
+			PlayerControl.LocalPlayer.moveable = false;
+		}
+
+		public override void OnDisable()
+		{
+			following = null;
+			if(PlayerControl.LocalPlayer != null) PlayerControl.LocalPlayer.moveable = true;
 		}
 
 		public override void OnDisconnect()
