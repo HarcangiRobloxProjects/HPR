@@ -17,7 +17,7 @@ namespace HydraMenu
 
 			if(ingame)
 			{
-				PlayerControl.LocalPlayer.CmdCheckColor((byte)rnd.Next(0, 17));
+				PlayerControl.LocalPlayer.CmdCheckColor((byte)rnd.Next(0, 18));
 
 				PlayerControl.LocalPlayer.RpcSetHat(allHats[rnd.Next(0, allHats.Length)].ProductId);
 				PlayerControl.LocalPlayer.RpcSetVisor(allVisors[rnd.Next(0, allVisors.Length)].ProductId);
@@ -90,7 +90,7 @@ namespace HydraMenu
 			HudManager.Instance.OpenMeetingRoom(reporter);
 		}
 
-		public static void ShapeshiftPlayer(PlayerControl victim, PlayerControl target)
+		public static void ShapeshiftPlayer(PlayerControl victim, PlayerControl target, bool shouldAnimate = true)
 		{
 			bool hasAnticheat = IsAnticheatPresent();
 
@@ -118,12 +118,12 @@ namespace HydraMenu
 				// meaning any future SetRole RPCs will be ignored unless the new role is a ghost role
 				// Just in case this ever gets changed in the future, we could broadcast the SetRole RPC to a junk client ID instead of everyone to avoid the client knowing they became a Shapeshifter
 				batch.QueueSetRole(victim, RoleTypes.Shapeshifter, true);
-				batch.QueueShapeshift(victim, target, true);
+				batch.QueueShapeshift(victim, target, shouldAnimate);
 				batch.QueueSetRole(victim, currentRole, true);
 			}
 			else
 			{
-				batch.QueueShapeshift(victim, target, true);
+				batch.QueueShapeshift(victim, target, shouldAnimate);
 			}
 
 			batch.FinishBatch();

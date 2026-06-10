@@ -1,8 +1,10 @@
 ﻿using AmongUs.Data;
 using AmongUs.GameOptions;
+using BepInEx.Unity.IL2CPP.Utils.Collections;
 using HydraMenu.features;
 using InnerNet;
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace HydraMenu.ui.sections
@@ -220,6 +222,11 @@ namespace HydraMenu.ui.sections
 				Utilities.ShapeshiftPlayer(target, randomPl);
 			}
 
+			if(GUILayout.Button("Frame for Killing All"))
+			{
+				target.StartCoroutine(AttemptFrameForKillingAll(target).WrapToIl2Cpp());
+			}
+
 			GUILayout.BeginHorizontal();
 			if(GUILayout.Button("Flood Player with Tasks"))
 			{
@@ -418,6 +425,46 @@ namespace HydraMenu.ui.sections
 			Hydra.Log.LogInfo($"All checks passed, we are able to report {target.Data.PlayerName}'s body.");
 
 			PlayerControl.LocalPlayer.CmdReportDeadBody(target.Data);
+		}
+
+		private static IEnumerator AttemptFrameForKillingAll(PlayerControl target)
+		{
+			Hydra.Log.LogInfo($"Attempting to frame {target.Data.PlayerName} for killing all players...");
+
+			bool hasAnticheat = Utilities.IsAnticheatPresent();
+			if(hasAnticheat && !AmongUsClient.Instance.AmHost)
+			{
+				Hydra.notifications.Send("Framer", "You must be the host of the lobby in order to use this option.");
+				yield break;
+			}
+
+			if(hasAnticheat && ShipStatus.Instance == null)
+			{
+				Hydra.notifications.Send("Framer", "The game must have started for this option for this option to work.");
+				yield break;
+			}
+
+			Host.DisableGameEnd.Enabled = true;
+
+			if(target != PlayerControl.LocalPlayer)
+			{
+				// On official servers, we are not able to send MurderPlayer RPCs with other player net IDs
+				// so we need to shapeshift into our desired player and kill everyone ourselves
+				Utilities.ShapeshiftPlayer(PlayerControl.LocalPlayer, target, false);
+			}
+
+			foreach(PlayerControl player in PlayerControl.AllPlayerControls)
+			{
+				if(player == target) continue;
+
+				PlayerControl.LocalPlayer.RpcMurderPlayer(player, true);
+			}
+
+			// Wait three seconds so all players can see which player we are framing
+			yield return Effects.Wait(3.0f);
+
+			Host.DisableGameEnd.Enabled = false;
+			Hydra.notifications.Send("Framer", $"Framed {target.Data.PlayerName} for killing all players!");
 		}
 	}
 }

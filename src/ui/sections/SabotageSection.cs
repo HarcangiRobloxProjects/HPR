@@ -71,7 +71,7 @@ namespace HydraMenu.ui.sections
 				return;
 			}
 
-			Controls.DrawButtonCell(doors, 2, HandleCloseDoor);
+			Controls.DrawButtonCell(doors, HandleCloseDoor, 2);
 		}
 
 		private void HandleSabotage(SystemTypes system)

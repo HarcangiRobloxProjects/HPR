@@ -98,7 +98,7 @@ namespace HydraMenu.ui
 			GUI.Box(rect, "", Styles.CreateCrewmateColorBox(colorName, colorName != "Fortegreen" ? player.Color : Color.black));
 		}
 
-		public static void DrawButtonCell<TKey,TValue>(Dictionary<TKey,TValue> buttons, int columnsPerRow, Action<TValue> action)
+		public static void DrawButtonCell<TKey,TValue>(Dictionary<TKey,TValue> buttons, Action<TValue> action, int columnsPerRow)
 		{
 			int currentColumn = 0;
 

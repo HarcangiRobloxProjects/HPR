@@ -34,7 +34,7 @@ namespace HydraMenu.ui.sections
 			GUILayout.Label("Teleport To Location:");
 
 			Dictionary<string, Vector2> teleportLocations = Teleporter.GetTeleportLocations();
-			Controls.DrawButtonCell(teleportLocations, 2, HandleTeleport);
+			Controls.DrawButtonCell(teleportLocations, HandleTeleport, 2);
 		}
 
 		private void HandleTeleport(Vector2 location)
