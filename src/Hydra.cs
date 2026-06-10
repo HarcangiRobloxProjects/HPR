@@ -10,7 +10,7 @@ namespace HydraMenu;
 
 [BepInPlugin("com.mrd.hydramenu", "Hydra", "1.6.0.0")]
 [BepInProcess("Among Us.exe")]
-public class Hydra : BasePlugin
+internal class Hydra : BasePlugin
 {
 	internal static new ManualLogSource Log;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace HydraMenu.ui
 {
-	public class NotificationManager : MonoBehaviour
+	internal class NotificationManager : MonoBehaviour
 	{
 		public List<Notification> notifications = new List<Notification>();
 		public bool DisableNotifications = false;

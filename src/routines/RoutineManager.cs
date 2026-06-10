@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace HydraMenu.routines
 {
-	public class RoutineManager : MonoBehaviour
+	internal class RoutineManager : MonoBehaviour
 	{
 		public AutoTriggerSporesRoutine autoTriggerSpores = new AutoTriggerSporesRoutine();
 		public DiscoHostRoutine discoHost = new DiscoHostRoutine();
