@@ -27,6 +27,7 @@ namespace HydraMenu.anticheat
 			{ RpcCalls.SnapTo, new SnapTo() },
 			{ RpcCalls.CloseDoorsOfType, new CloseDoorsOfType() },
 			{ RpcCalls.ClimbLadder, new ClimbLadder() },
+			{ RpcCalls.UsePlatform, new UsePlatform() },
 			{ RpcCalls.UpdateSystem, new UpdateSystem() },
 			{ RpcCalls.SetLevel, new SetLevel() }
 		};

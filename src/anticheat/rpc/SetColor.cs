@@ -4,11 +4,6 @@ namespace HydraMenu.anticheat.rpc
 {
 	internal class SetColor : RpcCheck
 	{
-		public override RpcCalls GetRpcCall()
-		{
-			return RpcCalls.SetColor;
-		}
-
 		public override void Validate(PlayerControl player, MessageReader reader, ref bool blockRpc)
 		{
 			uint netId = reader.ReadUInt32();
@@ -31,6 +26,11 @@ namespace HydraMenu.anticheat.rpc
 			{
 				player.SetColor((byte)CrewmateColor.Red);
 			}
+		}
+
+		public override RpcCalls GetRpcCall()
+		{
+			return RpcCalls.SetColor;
 		}
 
 		public override bool IsHostOnly()
